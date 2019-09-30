@@ -1,0 +1,23 @@
+<h3>Product data</h3>
+<div>
+    name = {{name}}
+    <br>
+    description = {{description}}
+    <br>
+    price = {{price}};
+    <br>
+    <span textContent="Our categori is {{category}}"></span>
+    <br>
+    isAvailable = {{isAvailable}};
+    <div>Suppliers:</div>
+    <div *ngFor="let supplier of suppliers">
+        <div>
+            <div>
+                <ul>
+                    <li>{{supplier}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    metadata = {{metadata}};
+</div>
