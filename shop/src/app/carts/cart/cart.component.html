@@ -1,0 +1,12 @@
+<div class="product-list">Cart list</div>
+<app-product-list
+    *ngIf="productList.length > 0; else emptyCart"
+    [productList]="productList"
+    [isFullModel]="false">
+</app-product-list>
+
+<ng-template class="emptyCart" #emptyCart>
+    <p>
+        Cart is empty. Please add something to the cart.
+    </p>
+</ng-template>
