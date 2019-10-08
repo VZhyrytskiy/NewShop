@@ -1,0 +1,25 @@
+<div class="panel panel-default product">
+    <div class="panel-body">
+        <tr>
+            <th>Name: {{product.name}}</th>
+        </tr>
+        <tr>
+            <th>Description: {{product.description}}</th>
+        </tr>
+        <tr>
+            <th>Price: {{product.price}}</th>
+        </tr>
+        <tr>
+            <th>Category: {{product.category}}</th>
+        </tr>
+        <tr>
+            <th>Count: {{product.count}}</th>
+        </tr>
+        <tr>
+            <th>Code: {{product.code}}</th>
+        </tr>
+        <tr>
+            <th><button (click)="onAddToCart($event)" [disabled]="product.count == 0">Buy</button></th>
+        </tr>
+    </div>
+</div>
