@@ -16,6 +16,8 @@ export class CartItemComponent implements OnInit {
 
   @Output() remove: EventEmitter<CartItemModel> = new EventEmitter<CartItemModel>();
 
+  // Постарайтесь избавится от этой зависимости, генерите аутпут.
+  // У родительского компонента уже есть эта зависимость.
   constructor(
     private cartService: CartService
   ) { }

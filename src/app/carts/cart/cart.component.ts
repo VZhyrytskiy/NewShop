@@ -18,3 +18,4 @@ export class CartComponent implements OnInit {
     return this.cartService.getCartProducts();
   }
 }
+// Что это за компонент с пустым шаблоном?

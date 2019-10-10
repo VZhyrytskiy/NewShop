@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable, from  } from 'rxjs';
+import { Subject, Observable, from } from 'rxjs';
 
 import { IProductModel } from '../interfaces/product.model';
 import { ProductsService } from './products.service';
@@ -13,6 +13,7 @@ export class CartService {
   productList: IProductModel[] = [];
   count$: Observable<any>;
   totalPrice$: Observable<any>;
+  // используйте не Subject, а BehaviorSubject. Будет возможность задать стартовое значение и не надо будет в компоненте присваивать нули
   private countSubject: Subject<number> = new Subject();
   private totalPriceSubject: Subject<number> = new Subject();
 
@@ -22,12 +23,21 @@ export class CartService {
   }
 
   buyProduct(product: IProductModel) {
-      const isSuccessTryGetMore = this.getOneMore(product);
-      if (!isSuccessTryGetMore) {
-        this.productList.push(new ProductModel(product.name, product.description, product.price, product.category, product.code, 1));
-        this.countSubject.next(this.productList.length);
-        this.totalPriceSubject.next(this.totalPrice);
-      }
+    const isSuccessTryGetMore = this.getOneMore(product);
+    if (!isSuccessTryGetMore) {
+      this.productList.push(
+        new ProductModel(
+          product.name,
+          product.description,
+          product.price,
+          product.category,
+          product.code,
+          1
+        )
+      );
+      this.countSubject.next(this.productList.length);
+      this.totalPriceSubject.next(this.totalPrice);
+    }
   }
 
   getOneMore(product: IProductModel): boolean {
@@ -46,20 +56,26 @@ export class CartService {
   }
 
   getSomeMore(product: ProductCartModel): boolean {
-    const isSuccessTry = this.productsService.getSome(product.item as ProductModel, product.amount);
+    const isSuccessTry = this.productsService.getSome(
+      product.item as ProductModel,
+      product.amount
+    );
 
     if (isSuccessTry) {
       const element = this.productList.find(p => p.code === product.item.code);
       if (!!element) {
-        element.count = element.count * 1  + product.amount * 1;
+        element.count = element.count * 1 + product.amount * 1;
       } else {
-        this.productList.push(new ProductModel(
-          product.item.name,
-          product.item.description,
-          product.item.price,
-          product.item.category,
-          product.item.code,
-          product.amount));
+        this.productList.push(
+          new ProductModel(
+            product.item.name,
+            product.item.description,
+            product.item.price,
+            product.item.category,
+            product.item.code,
+            product.amount
+          )
+        );
         this.countSubject.next(this.productList.length);
         this.totalPriceSubject.next(this.totalPrice);
         this.countSubject.next(this.productList.length);
@@ -74,7 +90,9 @@ export class CartService {
   returnOne(product: IProductModel) {
     const element = this.productList.find(x => x.code === product.code);
     if (!!element && element.count > 1) {
-      const isSuccessReturn = this.productsService.returnOne(product as ProductModel);
+      const isSuccessReturn = this.productsService.returnOne(
+        product as ProductModel
+      );
       if (isSuccessReturn) {
         element.count--;
         this.totalPriceSubject.next(this.totalPrice);
@@ -98,8 +116,9 @@ export class CartService {
   }
 
   get totalPrice(): number {
-    return this.productList.map(p => p.count * p.price)
-                           .reduce((sum, current) => sum + current);
+    return this.productList
+      .map(p => p.count * p.price)
+      .reduce((sum, current) => sum + current);
   }
 
   get count(): number {

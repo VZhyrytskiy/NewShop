@@ -8,6 +8,7 @@ export class CartItemModel {
     code: number;
     count: number;
     constructor(
+      // Используйте public для параметров
         name: string,
         description: string,
         price: number,

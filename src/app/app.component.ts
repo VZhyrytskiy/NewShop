@@ -10,6 +10,7 @@ export class AppComponent implements AfterViewInit {
   childComp: ElementRef<HTMLHeadingElement>;
 
   ngAfterViewInit() {
+    // Тут можно задействовать Renderer2
     this.childComp.nativeElement.innerHTML = 'Shop';
   }
 }

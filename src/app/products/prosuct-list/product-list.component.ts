@@ -12,15 +12,14 @@ import { ProductCartModel } from '../../shared/models/product-cart-model';
   styleUrls: ['./product-list.component.sass']
 })
 export class ProductListComponent implements OnInit {
-
   constructor(
     private productsService: ProductsService,
-    private cartService: CartService) {
-  }
+    private cartService: CartService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  // В чем смысл использовать разные типы и дополнительно приводить с одного типа в другой
   onAddToCart(product: ProductModel): void {
     this.cartService.buyProduct(product as IProductModel);
   }
@@ -29,16 +28,21 @@ export class ProductListComponent implements OnInit {
     this.cartService.getSomeMore(product);
   }
 
-  get productList(): ProductModel[]  {
-    const result  =  [];
+  get productList(): ProductModel[] {
+    const result = [];
+    // Такую обработку желательно не писать в компоненте, а выносить в сервисы.
     const productList = this.productsService.getProducts();
     for (const element of productList) {
-      result.push(new ProductModel(element.name,
-        element.description,
-        element.price,
-        element.category,
-        element.code,
-        element.count));
+      result.push(
+        new ProductModel(
+          element.name,
+          element.description,
+          element.price,
+          element.category,
+          element.code,
+          element.count
+        )
+      );
     }
     return result;
   }

@@ -13,7 +13,7 @@ import { IProductModel } from 'src/app/shared/interfaces/product.model';
 
 export class CartListComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
-  private priceObservable: Subscription = new Subscription();
+  // private priceObservable: Subscription = new Subscription();
   count: number;
   totalPrice: number;
 
@@ -27,7 +27,7 @@ export class CartListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.cartService.count$.subscribe(item => {
       this.count = item;
     }));
-    this.priceObservable.add(this.cartService.totalPrice$.subscribe(item => {
+    this.subscriptions.add(this.cartService.totalPrice$.subscribe(item => {
       this.totalPrice = item;
     }));
   }
@@ -37,6 +37,7 @@ export class CartListComponent implements OnInit, OnDestroy {
   }
 
   get cartList(): CartItemModel[]  {
+    // На мой взгляд какие-то лишние манипуляции тут происходят
     const result  =  [];
     const cartProductList = this.cartService.getCartProducts();
     for (const element of cartProductList) {
@@ -51,7 +52,7 @@ export class CartListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.priceObservable.unsubscribe();
+    // this.priceObservable.unsubscribe();
     this.subscriptions.unsubscribe();
   }
 }

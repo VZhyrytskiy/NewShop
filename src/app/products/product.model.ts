@@ -10,6 +10,7 @@ export class ProductModel implements IProductModel  {
     count: number;
     code: number;
     constructor(
+      // Используйте для параметров конструктора public и кода будет в три раза меньше
         name: string,
         description: string,
         price: number,
