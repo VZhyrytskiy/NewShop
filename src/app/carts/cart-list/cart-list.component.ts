@@ -2,7 +2,7 @@ import { Component, OnInit, ɵCodegenComponentFactoryResolver, OnDestroy } from 
 import { Subscription, Observable } from 'rxjs';
 
 import { CartService } from '../../shared/services/cart.service';
-import { CartItemModel } from  '../cart-item-model';
+import { CartItemModel } from '../cart-item-model';
 import { IProductModel } from 'src/app/shared/interfaces/product.model';
 
 @Component({
@@ -37,10 +37,9 @@ export class CartListComponent implements OnInit, OnDestroy {
   }
 
   get cartList(): CartItemModel[]  {
-    let result  =  [];
-    let cartProductList = this.cartService.getCartProducts();
-    for (let index = 0; index < cartProductList.length; index++) {
-      const element = cartProductList[index];
+    const result  =  [];
+    const cartProductList = this.cartService.getCartProducts();
+    for (const element of cartProductList) {
       result.push(new CartItemModel(element.name,
         element.description,
         element.price,

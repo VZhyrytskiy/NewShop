@@ -19,7 +19,22 @@
             <th>Code: {{product.code}}</th>
         </tr>
         <tr>
-            <th><button (click)="onAddToCart($event)" [disabled]="product.count == 0">Buy</button></th>
+            <th><button (click)="onAddToCart($event)" [disabled]="product.count == 0">Buy one</button></th>
+        </tr>
+        <tr>
+            <th>
+                <label for="estHours">Adding items:</label>
+            </th>
+            <th>
+                <input type="number"
+                min="0"
+                class="form-control" id="amount"
+                placeholder="0"
+                #amount>
+            </th>
+            <th>
+                <button (click)='onAddsToCart({"amount" : amount.value })' [disabled]="product.count == 0">Buy</button>
+            </th>
         </tr>
     </div>
 </div>

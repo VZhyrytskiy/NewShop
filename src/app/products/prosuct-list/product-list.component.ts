@@ -4,6 +4,7 @@ import { IProductModel } from '../../shared/interfaces/product.model';
 import { ProductModel } from '../product.model';
 import { CartService } from '../../shared/services/cart.service';
 import { ProductsService } from '../../shared/services/products.service';
+import { ProductCartModel } from '../../shared/models/product-cart-model';
 
 @Component({
   selector: 'app-product-list',
@@ -24,11 +25,14 @@ export class ProductListComponent implements OnInit {
     this.cartService.buyProduct(product as IProductModel);
   }
 
+  onAddsToCart(product: ProductCartModel): void {
+    this.cartService.getSomeMore(product);
+  }
+
   get productList(): ProductModel[]  {
-    let result  =  [];
-    let productList = this.productsService.getProducts();
-    for (let index = 0; index < productList.length; index++) {
-      const element = productList[index];
+    const result  =  [];
+    const productList = this.productsService.getProducts();
+    for (const element of productList) {
       result.push(new ProductModel(element.name,
         element.description,
         element.price,

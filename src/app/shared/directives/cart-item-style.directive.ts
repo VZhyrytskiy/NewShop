@@ -7,12 +7,12 @@ export class CartItemStyleDirective {
    constructor(private elRef: ElementRef, private renderer: Renderer2) {
    }
 
-  @HostListener("focus")
+  @HostListener('focus')
   onFocus() {
     this.renderer.addClass(this.elRef.nativeElement, 'hightligth');
   }
 
-  @HostListener("blur")
+  @HostListener('blur')
   onBlur() {
     this.renderer.removeClass(this.elRef.nativeElement, 'hightligth');
   }

@@ -20,8 +20,8 @@ export class ProductsService {
     return this.productList;
   }
 
-  getOne(product: ProductModel) : Boolean {
-    let element = this.productList.find(x => x.code === product.code);
+  getOne(product: ProductModel): boolean {
+    const element = this.productList.find(x => x.code === product.code);
     if (!!element && element.count > 0) {
       element.count--;
       return true;
@@ -30,8 +30,18 @@ export class ProductsService {
     return false;
   }
 
-  returnOne(product: ProductModel) : Boolean {
-    let element = this.productList.find(x => x.code === product.code);
+  getSome(product: ProductModel, amount: number): boolean {
+    const element = this.productList.find(x => x.code === product.code);
+    if (!!element && element.count - amount >= 0) {
+      element.count = element.count  - amount;
+      return true;
+    }
+
+    return false;
+  }
+
+  returnOne(product: ProductModel): boolean {
+    const element = this.productList.find(x => x.code === product.code);
     if (!!element) {
       element.count++;
       return true;
@@ -39,8 +49,8 @@ export class ProductsService {
     return false;
   }
 
-  removeOne(product: ProductModel) : Boolean {
-    let element = this.productList.find(x => x.code === product.code);
+  removeOne(product: ProductModel): boolean {
+    const element = this.productList.find(x => x.code === product.code);
     if (!!element) {
       element.count += product.count;
       return true;
