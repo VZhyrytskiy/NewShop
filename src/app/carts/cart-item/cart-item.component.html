@@ -1,0 +1,30 @@
+<div appCartItemStyle>Item:
+    <tr>
+        <th>Name: {{cartItem.name}}</th>
+    </tr>
+    <tr>
+        <th>Description: {{cartItem.description}}</th>
+    </tr>
+    <tr>
+        <th>Price: {{cartItem.price}}</th>
+    </tr>
+    <tr>
+        <th>Category: {{cartItem.category}}</th>
+    </tr>
+    <tr>
+        <th>
+            <button type="button"
+            class="btn btn-primary"
+            (click)='decrCount()'>-</button>
+        </th>
+        <th>Count: {{cartItem.count}}</th>
+        <th>
+            <button type="button"
+            class="btn btn-primary"
+            (click)='incrCount()'>+</button>
+        </th>
+    </tr>
+    <tr>
+        <button (click)="onRemoveItem()">Remove</button>
+    </tr>
+</div>
