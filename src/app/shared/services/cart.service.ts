@@ -76,6 +76,6 @@ export class CartService {
 
   getTotalPrice(): number {
     return this.productList.map(p => p.count * p.price)
-                                      .reduce((sum, current) => sum + current);
+                           .reduce((sum, current) => sum + current);
   }
 }

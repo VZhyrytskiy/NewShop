@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { IProductModel } from '../../shared/interfaces/product.model';
 import { ProductModel } from '../product.model';
